@@ -1,0 +1,90 @@
+Git commands used in this assignment
+====================================
+
+Step 1: Local repository setup
+------------------------------
+git init -b main
+    Creates a new empty Git repository in the current folder and names the
+    first branch "main".
+
+git status
+    Shows the current state of the working folder: which files are untracked,
+    modified, or staged for the next commit.
+
+Step 2: Git workflow
+--------------------
+git add index.html about.html
+    Stages the named files, so their current contents are included in the
+    next commit.
+
+git commit -m "Initial commit: add index and about pages"
+    Saves the staged changes as a new commit in the history, with the given
+    message describing the change.
+
+git branch feature
+    Creates a new branch called "feature" that starts at the current commit.
+    It does not switch to it.
+
+git switch feature
+    Switches the working folder to the "feature" branch, so new commits are
+    added to that branch.
+
+git switch main
+    Switches back to the "main" branch.
+
+git merge --no-ff feature -m "Merge feature branch into main"
+    Brings the commits from "feature" into "main". The --no-ff option forces
+    a separate merge commit, so the branch stays visible in the history.
+
+git log --oneline --graph --all
+    Displays the commit history of all branches, one line per commit, with a
+    text graph showing where branches split and merge.
+
+Step 3: .gitignore
+------------------
+git add .gitignore
+git commit -m "Add .gitignore for log files and temp folder"
+    Stages and commits the .gitignore file. Its two rules (*.log and temp/)
+    tell Git to leave log files and the temp folder untracked, which
+    "git status" confirms by not listing them.
+
+Step 4: Undo operation
+----------------------
+git commit -am "Add temporary footer to home page"
+    Stages every already-tracked file that was modified and commits it in a
+    single step (-a stages, -m supplies the message).
+
+git log --oneline -3
+    Shows only the three most recent commits, used here to compare the
+    history before and after the undo.
+
+git revert HEAD --no-edit
+    Undoes the last commit by creating a new commit that applies the opposite
+    changes. The history is kept intact, and --no-edit accepts the default
+    "Revert ..." message.
+
+Step 5: GitHub integration
+--------------------------
+gh repo create git-assignment --public
+    (GitHub CLI, not a Git command.) Creates an empty public repository on
+    GitHub. This can also be done on the GitHub website.
+
+git remote add origin https://github.com/Jenish-1235/git-assignment.git
+    Connects the local repository to the GitHub repository and gives that
+    remote the short name "origin".
+
+git remote -v
+    Lists the configured remotes with their URLs, to verify the connection.
+
+git push -u origin main
+    Uploads the "main" branch and its commits to GitHub. The -u option links
+    the local branch to the remote one, so later pushes need no arguments.
+
+git push origin feature
+    Uploads the "feature" branch to GitHub as well.
+
+Step 6: Documentation file
+--------------------------
+git add git_commands.txt
+git commit -m "Add git commands documentation"
+    Stages and commits this file so that it is part of the repository.
